@@ -1,0 +1,22 @@
+{
+  "name": "front-end-miscellaneous-notes",
+  "version": "1.0.0",
+  "description": "前端学习杂记",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangchen130/front-end-miscellaneous-notes.git"
+  },
+  "keywords": [
+    "前端学习"
+  ],
+  "author": "wangchen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wangchen130/front-end-miscellaneous-notes/issues"
+  },
+  "homepage": "https://github.com/wangchen130/front-end-miscellaneous-notes#readme"
+}
