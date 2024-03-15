@@ -35,7 +35,7 @@ console.log([1, 2] + 2);            // '1,22'
 console.log([1, 2, 3, 4] + 222);    // '1,2,3,4222'
 console.log({n: 1, m: 2} + 1);      // [object Object]1
 ```
-![img.png](./2.加法运算/additionOperationInstructions.jpg)
+![加法运算](./2.加法运算/additionOperationInstructions.jpg)
 
 ## 3. && 和 || 的运算流程
 ```javascript
@@ -47,5 +47,31 @@ console.log('3 || 5:', 3 || 5); // 3 || 5: 3
 console.log('4 || 5 && 6 || 7:', 4 || 5 && 6 || 7); // 4 || 5 && 6 || 7: 4
 console.log('(4 || 5) && (6 || 7):', (4 || 5) && (6 || 7)); // (4 || 5) && (6 || 7): 6
 ```
-![img.jpg](3.与运算符和或运算符的预算流程/img.jpg)
+![3.与运算符和或运算符的预算流程](3.与运算符和或运算符的预算流程/img.jpg)
 
+## 4. js 赋值运算的详细流程
+```javascript
+// 以下代码输出什么？
+let a = {n: 1};
+let b = a;
+a.x = a = {n: 2}
+
+console.log(a.x) // undefined
+console.log(b.x) // { n: 2 }
+
+/**
+ * 分析过程：
+ * 1. let a = {n: 1}; => 创建一个对象 obj = {n: 1}，并将 a 赋值为对象 obj 的内存地址
+ * 2. let b = a; => 将变量 b 的值赋值为的对象 obj 的内存地址，这时 a 和 b 同时指向 obj
+ * 3. a.x = a = {n: 2}
+ *    1）a.x = (a = {n: 2})：这时找到 a.x 的内存地址，因为 a 指向对象 obj ，obj 中没有 x 属性，
+ *      所以会在 obj 中开辟一块内存空间，即向 obj 中添加一个 key 为 x 属性，属性的值为 (a = {n: 2}) 运算后结果
+ *    2）a = {n: 2}：又是一个赋值运算，那么就再次走一遍赋值的运算流程，创建一个对象 obj2 = { n: 2}, 将 a 赋值为 obj2 的内存地址
+ *      这时 a 就指向了 obj2，这一步运算完了，得到的运算结果就是 obj2 对象的内存地址，即 (a = {n: 2}) 的运算结果就为 obj2 的运算结果
+ *    3）对 a.x 进行赋值，因为 a.x 的内存空间在 1）中已经开辟出来，就为 obj.x，就等待赋值了，现在将 (a = {n: 2}) 的运算结果，
+ *      即 obj2 赋值给 a.x，即将 obj2 赋值给 obj.x，这时 obj = { n: 1, x: {n: 2}}，因为 a 已经指向了 obj2，这时只有 b 指向 obj，
+ *      所以：a.x = obj2.x = undefined， b.x = obj.x = {n: 2}
+ */
+
+```
+![赋值运算的详细流程](4.赋值运算的详细流程/img.jpg)
